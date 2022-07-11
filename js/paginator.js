@@ -35,9 +35,7 @@ async function getPosts(id, name){
                 <div class="col-3">${post.title}</div>
                 <div class="col-5">${post.body}</div>
                 <div class="col-3 text-center"><button class="btn btn-primary w-75" onclick="getComments(${post.id})">Comentarios</div>
-                
-                
-                <div class="col-12 text-center border" id="postNro${post.id}"></div>
+                <div class="col-12 mt-2 p-2 border" id="postNro${post.id}"></div>
                    
        `
     ))
@@ -51,7 +49,29 @@ async function getComments(id) {
     const commentContainer = $(`#postNro${id}`).is(':empty');
     console.log(commentContainer)
     if (commentContainer == true){
-        document.getElementById(`postNro${id}`).innerHTML = 'hola';
+        let allCommentaries = `
+                        <div class="row text-center border-bottom border-top">
+                            <div class="col-3 border-right p-2">Nombre</div> 
+                            <div class="col-3 border border-right p-2">Email</div> 
+                            <div class="col-6 p-2">Comentario</div>                                                        
+                        </div>
+                            `;
+
+        const url = `https://jsonplaceholder.typicode.com/posts/${id}/comments`;
+        const data = await fetch(url);
+        const commentaries = await data.json();
+        commentaries.map((comment, index) => (
+           allCommentaries += `                                       
+                                <div class="row p-2">
+                                    <div class="col-3">${comment.name}</div> 
+                                    <div class="col-3">${comment.email}</div> 
+                                    <div class="col-6">${comment.body}</div>                                                        
+                                </div>
+
+           `
+        ))
+    
+        document.getElementById(`postNro${id}`).innerHTML = allCommentaries;
     }else{
         document.getElementById(`postNro${id}`).innerHTML = '';
     }
