@@ -6,7 +6,7 @@ async function showAlbums(id) {
         const albums = await data.json();
         albums.map((album, index) => (
             userAlbums += `
-                    <div style="width: 20%;">
+                    <div class="link-container" style="width: 20%;">
                         <p class="text-center border p-2" style="height: 100px;" onclick="showPhotos(${album.id})" > ${album.title} </p>
                     </div>           
             `

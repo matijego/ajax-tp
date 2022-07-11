@@ -1,0 +1,23 @@
+.link-container p:hover {
+    background: #2980B9;
+  }
+
+  .imageBox {
+    position: relative;
+    float: left;
+  }
+  
+  .imageBox .hoverImg {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: none;
+  }
+  
+  .imageBox:hover .hoverImg {
+    display: block;
+  }
+
+  a{ 
+    text-decoration: none;
+  }
